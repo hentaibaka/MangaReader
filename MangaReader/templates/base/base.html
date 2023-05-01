@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='ru'>
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="UTF-8">
+
+        {% block style %}
+
+        {% endblock %}
+
+        {% block javascript %}
+
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            <div class="header" id="header">
+                {% for label, link in mainmenu %}
+                    <div class="header-elem" id="{{ label }}-elem">
+                        <a class="header-elem" id="{{ label }}" href="{% url link %}">{{ label }}</a>
+                    </div>
+                {% endfor %}
+
+                {% if user.is_authenticated %}
+                    <a class="header" id="user" href="{% url 'userpage' username=user.username %}">{{ user.username }}</a>
+                    <a class="header" id="logout" href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                    <a class="header" id="login" href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </div>
+        {% endblock %}
+
+        {% block content %}
+            <!--Содержимое страницы-->
+        {% endblock %}
+
+        {% block footer %}
+            <div class="footer" id="footer">
+                <p class="footer">Проект ТП</p>
+                <p class="footer">Фурилов Гусев</p>
+            </div>
+        {% endblock %}
+    </body>
+</html>
