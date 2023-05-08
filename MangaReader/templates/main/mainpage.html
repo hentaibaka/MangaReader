@@ -2,4 +2,58 @@
 
 {% block content %}
 
+    <h1>Популярное</h1>
+    {% for manga in popular %}
+        <table>
+            <tr>
+                <td>Название</td>
+                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+            </tr>
+            <tr>
+                <td>Обложка</td>
+                <td><img src="{{ manga.photo.url }}"></img></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ manga.description }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+
+    <h1>Недавно обновлённое</h1>
+    {% for manga in updated %}
+        <table>
+            <tr>
+                <td>Название</td>
+                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+            </tr>
+            <tr>
+                <td>Обложка</td>
+                <td><img src="{{ manga.photo.url }}"></img></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ manga.description }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+
+    <h1>Новое</h1>
+    {% for manga in new %}
+        <table>
+            <tr>
+                <td>Название</td>
+                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+            </tr>
+            <tr>
+                <td>Обложка</td>
+                <td><img src="{{ manga.photo.url }}"></img></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ manga.description }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+
 {% endblock %}

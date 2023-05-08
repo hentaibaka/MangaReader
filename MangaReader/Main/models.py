@@ -86,7 +86,7 @@ class ChapterToPhoto(models.Model):
     class Meta:
         verbose_name_plural = 'Страницы глав'
         verbose_name = 'Страница главы'
-        unique_together = ('chapter', 'number', 'photo')
+        unique_together = ('chapter', 'number')
 
     def __str__(self) -> str:
         return f"Глава: {self.chapter}, Номер страницы: {self.number}"
