@@ -1,5 +1,31 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+    <h1>{{ user.username }}</h1>
+    
+    {% for list, mangaList in lists.items %}
+
+        <h3>{{ list.name }}</h3>
+
+        {% for user2manga in mangaList %}
+        
+            <table>
+                <tr>
+                    <td>Название</td>
+                    <td><a href="{% url 'mangapage' mangaSlug=user2manga.manga.slug %}">{{ user2manga.manga.title }}</a></td>
+                </tr>
+                <tr>
+                    <td>Обложка</td>
+                    <td><img src="{{ user2manga.manga.photo.url }}"></img></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{ user2manga.manga.description }}</td>
+                </tr>
+            </table>
+
+        {% endfor %}
+
+    {% endfor %}
 
 {% endblock %}

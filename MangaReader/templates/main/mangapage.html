@@ -2,4 +2,32 @@
 
 {% block content %}
 
+    <table>
+        <tr>
+            <td>Название</td>
+            <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+        </tr>
+        <tr>
+            <td>Обложка</td>
+            <td><img src="{{ manga.photo.url }}"></img></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{ manga.description }}</td>
+        </tr>
+    </table>
+
+    <form method="post", enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ listForm.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <h2>Главы</h2>
+    <ul>
+        {% for chapter in chapters %}
+            <li><a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=chapter.number %}">{{ chapter.number }} {{ chapter.name }} {{ chapter.date_add }}</a></li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

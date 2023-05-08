@@ -3,7 +3,7 @@ from .models import *
 
 
 class UserListForm(forms.Form):
-    list = forms.ModelChoiceField(queryset=List.objects.all(), required=True, empty_label='', label='Добавить в коллекцию')
+    list = forms.ModelChoiceField(queryset=List.objects.all(), required=False, empty_label='Не в закладках', label='Добавить в коллекцию')
 
 class FilterForm(forms.Form):
     genre = forms.ModelMultipleChoiceField(Genre.objects.all(), required=False, label='Жанр')
