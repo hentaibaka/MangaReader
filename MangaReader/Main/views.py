@@ -17,8 +17,8 @@ class MainPageView(View):
         """
         context = {
             'popular': list[Manga]
-            'updated': list[manga]
-            'new': list[manga]
+            'updated': list[Manga]
+            'new': list[Manga]
         }
         """
 
