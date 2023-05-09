@@ -1,8 +1,8 @@
-def handle_manga_file(instance, filename):
+def handle_manga_file(instance, filename: str) -> str:
     filename = instance.slug + '.' + filename.split('.')[1]
     return f"images/manga/{instance.slug}/{filename}"
 
-def handle_chapter_file(instance, filename):
+def handle_chapter_file(instance, filename: str) -> str:
     filename = (instance.chapter.manga.slug + '_' + 
     str(instance.chapter.number) + '_' +
     str(instance.number) + 

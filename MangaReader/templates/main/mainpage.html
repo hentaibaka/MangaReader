@@ -10,6 +10,14 @@
                 <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
             </tr>
             <tr>
+                <td>Оценка</td>
+                <td>{{ manga.mark }}</td>
+            </tr>
+            <tr>
+                <td>Кол-во оценок</td>
+                <td>{{ manga.mark_count }}</td>
+            </tr>
+            <tr>
                 <td>Обложка</td>
                 <td><img src="{{ manga.photo.url }}"></img></td>
             </tr>

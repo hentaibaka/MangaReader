@@ -12,33 +12,58 @@ MAINPAGE_MANGA_TIMEOUT = 5 * 60
 class MyView:
     menu = (('Главная', 'main'), ('Каталог', 'catalogpage'))
 
+def a():
+    import os
+    for n in range(11, 18):
+        slug = 'Sono-Bisque-Doll-wa-Koi-wo-Suru'
+        manga = Manga.objects.get(slug=slug)
+        #chapter = Chapter.objects.get(manga=manga, number=n)
+        chapter = Chapter(manga=manga, name='', number=n)
+        chapter.save()
+        photos = os.listdir(f'./media/images/manga/{slug}/{n}/')
+        photos = sorted(photos, key=lambda x: int(x.split('.')[0]))
+        oldphotos = photos
+        photos = [f'{slug}_{n}_{i+1}.{v.split(".")[-1]}' for i, v in enumerate(photos)]
+        for old, new in zip(oldphotos, photos):
+            os.rename(f'./media/images/manga/{slug}/{n}/{old}', f'./media/images/manga/{slug}/{n}/{new}')
+        photos = sorted(photos, key=lambda x: int(x.split("_")[-1].split(".")[0]))
+        for i, photo in enumerate(photos):
+            ch2ph = ChapterToPhoto(chapter=chapter, photo=f'images/manga/{slug}/{n}/{photo}', number=i+1)
+            ch2ph.save()
+
 class MainPageView(View):
     def get(self, request):
         """
         context = {
-            'popular': list[Manga]
-            'updated': list[Manga]
-            'new': list[Manga]
+            'popular': list[Manga],
+            'updated': list[Manga],
+            'new': list[Manga],
         }
         """
-
-        popular = cache.get('popular')
+        popular = []
+        #popular = cache.get('popular')
         if not popular:
-            popular = [m for m in Manga.objects.order_by('mark_count')[:MAINPAGE_MANGA_COUNT]]
+            popular = [m for m in Manga.objects.order_by('-mark_count')[:MAINPAGE_MANGA_COUNT]]
             cache.set('popular', popular, MAINPAGE_MANGA_TIMEOUT)
 
-        updated = cache.get('updated')
+        updated = []
+        #updated = cache.get('updated')
         if not updated:
-            updated = [ch.manga 
-                       for ch in sorted(list(Chapter.objects.filter(manga=m).earliest('date_add') 
+            try:
+                chapters = sorted(list(Chapter.objects.filter(manga=m).latest('date_add') 
                                   for m in Manga.objects.all()), 
-                                  key=operator.attrgetter('date_add'))
-                                  [:MAINPAGE_MANGA_COUNT]]
+                                  key=operator.attrgetter('date_add'))[::-1]
+                
+            except Chapter.DoesNotExist or Manga.DoesNotExist:
+                chapters = []
+
+            updated = [ch.manga for ch in chapters[:]]
             cache.set('updated', updated, MAINPAGE_MANGA_TIMEOUT)
         
-        new = cache.get('new')
+        new = []
+        #new = cache.get('new')
         if not new:
-            new = [m for m in Manga.objects.order_by('date_add')[:MAINPAGE_MANGA_COUNT]]
+            new = [m for m in Manga.objects.order_by('-date_add')[:MAINPAGE_MANGA_COUNT]]
             cache.set('new', new, MAINPAGE_MANGA_TIMEOUT)
 
         context = {
