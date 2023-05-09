@@ -1,5 +1,33 @@
 {% extends 'base/base.html' %}
 
+{% block header %}
+    <!--нужно сделать кастомную шапку с ссылкой на мангу и выпадающим списком глав-->
+    <!--и чтобы шапка пряталась/появлялась при скролле вверх/вниз-->
+    <!--скажешь если не сможешь чисто через  css/html сделать список глав-->
+    <!--я попробую сделать тебе форму для этого-->
+    <a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a>
+{% endblock %}
 {% block content %}
+
+    {% for photo in photos %}
+
+        <img src="{{ photo.photo.url }}"></img>
+
+    {% endfor %}
+
+    {% if prevChapter %}
+        <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=prevChapter.number%}">Предыдущая</a>
+    {% else %}
+        <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
+        <!--Я в тебя верю, ты сможешь-->
+        <a href="">Предыдущая</a>
+    {% endif %}
+
+    {% if nextChapter %}
+        <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=nextChapter.number%}">Следующая</a>
+    {% else %}
+        <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
+        <a href="">Следующая</a> 
+    {% endif %}
 
 {% endblock %}
