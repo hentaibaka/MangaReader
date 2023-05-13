@@ -50,6 +50,7 @@ class Manga(models.Model):
     date_release = models. DateField(verbose_name="Дата выхода")
     date_add = models. DateField(auto_now_add=True, verbose_name="Дата добавления")
     type = models.ForeignKey(Type, blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Тип") 
+    jenre = models.ManyToManyField(Genre, blank=True, verbose_name="Жанры")
     status = models.ForeignKey(Status, related_name='Status', blank=False, null=True, on_delete=models.SET_NULL, verbose_name='Статус тайтла')
     status_translate = models.ForeignKey(Status, related_name="Status_translate", blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Статус перевода")
     mark = models.FloatField(default=0., verbose_name="Оценка") 
