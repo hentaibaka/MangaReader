@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block javascript-filter %}
+    {% load static %}
+    <script type="text/javascript" src={% static "js/filter.js" %}></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <form id="filterform" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ filterForm.as_p }}
+        {{ sortForm.as_p }}
+        <button type="submit">Применить</button>
+    </form> 
+
+    <div id='manga-container'>
+
+        {% for manga in mangaList %}
+
+            <table>
+                <tr>
+                    <td>Название</td>
+                    <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+                </tr>
+                <tr>
+                    <td>Оценка</td>
+                    <td>{{ manga.mark }}</td>
+                </tr>
+                <tr>
+                    <td>Кол-во оценок</td>
+                    <td>{{ manga.mark_count }}</td>
+                </tr>
+                <tr>
+                    <td>Обложка</td>
+                    <td><img src="{{ manga.photo.url }}"></img></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>{{ manga.description }}</td>
+                </tr>
+            </table>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

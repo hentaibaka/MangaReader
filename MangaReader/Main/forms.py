@@ -13,10 +13,10 @@ class FilterForm(forms.Form):
 
 class SortForm(forms.Form):
     sort = forms.ChoiceField(choices=[
-        ('cm', 'Количество оценок'),
-        ('mk', 'Оценке'),
-        ('ad', 'Дате добавления'),
-        ('cc', 'Количеству глав'),
+        ('mark_count', 'Количество оценок'),
+        ('mark', 'Оценке'),
+        ('date_add', 'Дате добавления'),
+        ('chapter_count', 'Количеству глав'),
     ], required=False, label='Сортировать по')
     order = forms.ChoiceField(choices=[
         ('a', 'По возрастанию'),

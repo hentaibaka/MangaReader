@@ -3,7 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('ajax/filter/', FilterView.as_view(), name='filterajax'),
-    path('ajax/setmark/', SetMarkView.as_view(), name='setmarkajax'),
-    path('ajax/setuserlist/', SetUserListView.as_view(), name='setuserlistajax'),
+    path('filter/', FilterView.as_view(), name='filterajax'),
+    path('setmark/', SetMarkView.as_view(), name='setmarkajax'),
+    path('setuserlist/', SetUserListView.as_view(), name='setuserlistajax'),
 ]

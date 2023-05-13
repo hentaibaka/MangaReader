@@ -80,15 +80,25 @@ class CatalogPageView(View):
     def get(self, request):
         """
         context = {
-            #запрос данных будет через AJAX
+            'filterForm': FilterForm,
+            'sortForm': SortForm,
+            'mangaList': list[Manga],
         }
         """
 
+        filterForm = FilterForm()
+        sortForm = SortForm()
+        mangaList = Manga.objects.all()
+
         context = {
             'title': 'Каталог',
+            'filterForm': filterForm,
+            'sortForm': sortForm,
+            'mangaList': mangaList,
             'mainmenu': MyView.menu,
         }
         return render(request, 'main/catalogpage.html', context)
+
 
 class MangaPageView(View):
     def get(self, request, mangaSlug):
@@ -159,7 +169,7 @@ class ReaderPageView(View):
         }
 
         return render(request, 'main/readerpage.html', context)
-    
+
 class UserPageView(View):
     def get(self, request, username):
         """
