@@ -105,3 +105,28 @@ class UserToManga(models. Model):
 
     def __str__(self) -> str:
         return f"Манга: {self.manga}, Пользователь: {self.user}, Список: {self.list}"
+    
+class MarkChoices(models.IntegerChoices):
+    ONE = (1, "1")
+    TWO = (2, "2")
+    THREE = (3, "3")
+    FOUR = (4, "4")
+    FIVE = (5, "5")
+    SIX = (6, "6")
+    SEVEN = (7, "7")
+    EIGHT = (8, "8")
+    NINE = (9, "9")
+    TEN = (10, "10")
+
+class UserMarkToManga(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE, verbose_name="Пользователь")
+    manga = models.ForeignKey(Manga, blank=False, null=False, on_delete=models.CASCADE, verbose_name="Манга")
+    mark = models.IntegerField(choices=MarkChoices.choices, default=MarkChoices.ONE, blank=False, null=False, verbose_name="Оценка")
+
+    class Meta:
+        verbose_name_plural = 'Оценки пользователей'
+        verbose_name = 'Оценка пользователя'
+        unique_together = ('user', 'manga')
+
+    def __str__(self) -> str:
+        return f"Манга: {self.manga} Пользователь: {self.user} Оценка: {self.mark}"

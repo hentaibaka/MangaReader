@@ -3,7 +3,12 @@ from .models import *
 
 
 class UserListForm(forms.Form):
-    list = forms.ModelChoiceField(queryset=List.objects.all(), required=False, empty_label='Не в закладках', label='Добавить в коллекцию')
+    list = forms.ModelChoiceField(queryset=List.objects.all(), required=False, empty_label=None, label='Добавить в коллекцию')
+
+class MarkForm(forms.ModelForm):
+    class Meta:
+        model = UserMarkToManga
+        exclude = ['user', 'manga']
 
 class FilterForm(forms.Form):
     genre = forms.ModelMultipleChoiceField(Genre.objects.all(), required=False, label='Жанр')

@@ -10,4 +10,5 @@ admin.site.register(Manga)
 admin.site.register(Chapter)
 admin.site.register(ChapterToPhoto)
 admin.site.register(UserToManga)
+admin.site.register(UserMarkToManga)
 

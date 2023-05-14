@@ -107,6 +107,7 @@ class MangaPageView(View):
             'manga': Manga,
             'chapters': list[Chapter], #уже отстортированные по порядку
             'listForm': UserListForm,
+            'markForm': MarkForm
         }
         """
 
@@ -114,13 +115,32 @@ class MangaPageView(View):
 
         chapters = Chapter.objects.filter(manga=manga).order_by('number')
 
-        listForm = UserListForm()
+        user = User.objects.get(username=request.user.username)
+
+        try:
+            userlist = UserToManga.objects.get(user=user, manga=manga)
+            listForm = UserListForm(initial={'list': userlist.list})
+            isUserList = True
+        except UserToManga.DoesNotExist:
+            listForm = UserListForm()
+            isUserList = False
+
+        try:
+            usermark = UserMarkToManga.objects.get(user=user, manga=manga)
+            markForm = MarkForm(initial={"mark": usermark.mark})
+            isUserMark = True
+        except UserMarkToManga.DoesNotExist:
+            markForm = MarkForm()
+            isUserMark = False
 
         context = {
             'title': manga.title,
             'manga': manga,
             'chapters': chapters,
             'listForm': listForm,
+            'isUserList': isUserList,
+            'markForm': markForm,
+            'isUserMark': isUserMark,
             'mainmenu': MyView.menu,
         }
 

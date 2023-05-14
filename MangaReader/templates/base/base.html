@@ -13,8 +13,25 @@
         {% endblock %}
 
         {% block javascript-filter %}
-
+        <!--js block for catalog page-->
         {% endblock %}
+
+        {% block javascript-manga %}
+        <!--js block for manga page-->
+        {% endblock %}
+
+        {% block javascript-reader %}
+        <!--js block for reader page-->
+        {% endblock %}
+
+        {% block sessiondata %}
+            <!--нужно, чтобы можно было получать доступ к параметрам из реквеста-->
+            {{ request.user.username|json_script:"username" }}
+            {% block pagedata %}
+
+            {% endblock %}
+        {% endblock %}
+
     </head>
     <body>
         {% block header %}

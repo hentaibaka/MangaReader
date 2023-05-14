@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        console.log($(this).serialize())
+        
         $.ajax({
             data: $(this).serialize(),
             headers: {
