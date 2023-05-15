@@ -49,13 +49,16 @@ class MainPageView(View):
         updated = []
         #updated = cache.get('updated')
         if not updated:
-            try:
-                chapters = sorted(list(Chapter.objects.filter(manga=m).latest('date_add') 
-                                  for m in Manga.objects.all()), 
-                                  key=operator.attrgetter('date_add'))[::-1]
+            #переписать
+            chapters = []
+            for m in Manga.objects.all():
+                try:
+                    chapter = Chapter.objects.filter(manga=m).latest('date_add') 
+                    chapters.append(chapter)
+                except Chapter.DoesNotExist:
+                    pass
                 
-            except Chapter.DoesNotExist or Manga.DoesNotExist:
-                chapters = []
+            chapters = sorted(chapters, key=operator.attrgetter('date_add'))[::-1]
 
             updated = [ch.manga for ch in chapters[:MAINPAGE_MANGA_COUNT]]
             cache.set('updated', updated, MAINPAGE_MANGA_TIMEOUT)
@@ -63,7 +66,7 @@ class MainPageView(View):
         new = []
         #new = cache.get('new')
         if not new:
-            new = [m for m in Manga.objects.order_by('-date_add')[:MAINPAGE_MANGA_COUNT]]
+            new = Manga.objects.all().order_by('date_add')[::-1][:MAINPAGE_MANGA_COUNT]
             cache.set('new', new, MAINPAGE_MANGA_TIMEOUT)
 
         context = {
