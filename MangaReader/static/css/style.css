@@ -1,19 +1,3 @@
-.footer {
-    background-color: #6857eb;
-     position:relative;
-     right: 0;
-     bottom: 0;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     min-width: 100%;   
-     height: 5%;
-     font-size: 14px;
-    font-weight: 650;
-    color: #000000;  
-    margin-top: 15px;
-}
 
 .header {
     display: flex;
@@ -31,14 +15,6 @@ body{
 .header a:hover {
     background-color: rgb(51, 50, 50);
     color: white;
-}
-
-
-
-@media screen and (max-width: 576px){
-    .footer{
-        display: none;
-    }
 }
 
    * {
@@ -82,8 +58,8 @@ body{
 }
 .block_right{
     display: flex;
-    width: 75%;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: flex-start;
     align-items: center;
 }
 

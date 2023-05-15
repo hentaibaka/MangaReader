@@ -12,11 +12,13 @@ img{
 .all_manga{
     display: flex;
 }
+
 .wrapper{
     display: flex;
     flex-wrap: wrap;
-    max-width: 76%;
-    min-height: 40%;
+    max-width: 70%;
+    min-height: 250px;
+    max-height: 250px;
     border: 1px solid black;
     border-radius: 20px;
     background-color: rgb(32, 30, 30);
@@ -29,6 +31,30 @@ img{
     overflow-x: auto;   
     flex-wrap: nowrap;
     flex-direction: column;
+}
+
+@media screen and (max-width: 4000px){
+    .wrapper{
+        max-width: 1135px;
+    }
+}
+@media screen and (max-width: 1885px){
+    .wrapper{
+        max-width: 60%;
+    }
+
+}
+@media screen and (max-width: 1400px){
+    .wrapper{
+        max-width: 80%;
+    }
+
+}
+@media screen and (max-width: 750px){
+    .wrapper{
+        max-width: 95%;
+    }
+
 }
 
 .manga_title{
