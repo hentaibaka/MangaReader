@@ -27,7 +27,8 @@
                 </tr>
                 <tr>
                     <td>Оценка</td>
-                    <td>{{ manga.mark }}</td>
+                    {% load floattags %}
+                    <td>{{ manga.mark|formatted_float }}</td>
                 </tr>
                 <tr>
                     <td>Кол-во оценок</td>

@@ -24,6 +24,10 @@
         <!--js block for reader page-->
         {% endblock %}
 
+        {% block javascript-main %}
+        <!--js block for main page-->
+        {% endblock %}
+
         {% block sessiondata %}
             <!--нужно, чтобы можно было получать доступ к параметрам из реквеста-->
             {{ request.user.username|json_script:"username" }}

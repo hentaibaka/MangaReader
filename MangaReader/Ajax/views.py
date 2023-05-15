@@ -44,21 +44,25 @@ class SetUserMarkView(View):
                 
                 try:
                     currentUsermark = UserMarkToManga.objects.get(user=user, manga=manga)
-                    currentUsermark.mark = usermark
+                    if currentUsermark != usermark:
+                        newMark = (manga.mark * manga.mark_count - currentUsermark.mark) / (manga.mark_count - 1)
+                        manga.mark = newMark
+                        manga.mark_count -= 1
+                        
+                        currentUsermark.mark = usermark
+                    else:
+                        return JsonResponse({}, status=200)
                 except UserMarkToManga.DoesNotExist:
                     currentUsermark = UserMarkToManga(user=user, manga=manga, mark=usermark)
 
-                print(manga.mark, manga.mark_count)
-                #сделать оценку тут и при удалении
-                #manga.mark = (manga.mark + usermark) / 2
-                #manga.mark_count += 1
-
-                print(manga.mark, manga.mark_count)
+                newMark = (manga.mark * manga.mark_count + usermark) / (manga.mark_count + 1)
+                manga.mark = newMark
+                manga.mark_count += 1
 
                 currentUsermark.save()
                 manga.save()
                 
-                return JsonResponse({}, status=200)
+                return JsonResponse({'mark': round(manga.mark, 2), 'mark_count': manga.mark_count}, status=200)
             except Exception as ex:
                 print(ex)
                 return JsonResponse({}, status=400)
@@ -96,11 +100,16 @@ class DeleteUserMarkView(View):
 
                 try:
                     currentUsermark = UserMarkToManga.objects.get(user=user, manga=manga)
+                    newMark = (manga.mark * manga.mark_count - currentUsermark.mark) / (manga.mark_count - 1)
+                    manga.mark = newMark
+                    manga.mark_count -= 1
+
+                    manga.save()
                     currentUsermark.delete()
+                    return JsonResponse({'mark': round(manga.mark, 2), 'mark_count': manga.mark_count}, status=200)
                 except UserMarkToManga.DoesNotExist:
-                    pass
-                
-                return JsonResponse({}, status=200)
+                    return JsonResponse({}, status=200)
+
             except Exception as ex:
                 print(ex)
                 return JsonResponse({}, status=400)

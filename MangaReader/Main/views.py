@@ -57,7 +57,7 @@ class MainPageView(View):
             except Chapter.DoesNotExist or Manga.DoesNotExist:
                 chapters = []
 
-            updated = [ch.manga for ch in chapters[:]]
+            updated = [ch.manga for ch in chapters[:MAINPAGE_MANGA_COUNT]]
             cache.set('updated', updated, MAINPAGE_MANGA_TIMEOUT)
         
         new = []

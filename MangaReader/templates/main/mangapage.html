@@ -22,7 +22,8 @@
         <tr>
             <td>Оценка</td>
             <!--id мне нужен чтобы через js менять значение через ajax-->
-            <td id="mark">{{ manga.mark }}</td>
+            {% load floattags %}
+            <td id="mark">{{ manga.mark|formatted_float }}</td>
         </tr>
         <tr>
             <td>Кол-во оценок</td>

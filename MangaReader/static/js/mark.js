@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     markform = document.querySelector('#markform');
     markcancelbtn = document.getElementById("markformcancel");
 
+    mark = document.getElementById("mark");
+    mark_count = document.getElementById("mark-count");
+
     $("button#markformsubmit").on('click', function(event) {
         event.preventDefault();
         
@@ -20,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             url: '/ajax/setusermark/',
             success: function(response) {
+                mark.innerHTML = response.mark;
+                mark_count.innerHTML = response.mark_count;
                 markcancelbtn.hidden = false;
             },
             error: function(response) {
@@ -44,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             url: '/ajax/deleteusermark/',
             success: function(response) {
+                mark.innerHTML = response.mark;
+                mark_count.innerHTML = response.mark_count;
                 markcancelbtn.hidden = true;
             },
             error: function(response) {

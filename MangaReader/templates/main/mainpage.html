@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 
+
 {% block content %}
 
     <h1>Популярное</h1>
@@ -11,11 +12,13 @@
             </tr>
             <tr>
                 <td>Оценка</td>
-                <td>{{ manga.mark }}</td>
+                {% load floattags %}
+                <td class="manga-mark">{{ manga.mark|formatted_float }}</td>
             </tr>
             <tr>
                 <td>Кол-во оценок</td>
-                <td>{{ manga.mark_count }}</td>
+                {% load inttags %}
+                <td>{{ manga.mark_count|formatted_int }}</td>
             </tr>
             <tr>
                 <td>Обложка</td>
