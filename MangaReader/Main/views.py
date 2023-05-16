@@ -115,8 +115,10 @@ class MangaPageView(View):
         """
 
         manga = Manga.objects.get(slug=mangaSlug)
-
-        chapters = Chapter.objects.filter(manga=manga).order_by('number')
+        try:
+            chapters = Chapter.objects.filter(manga=manga).order_by('number')
+        except Chapter.DoesNotExist:
+            chapters = [] 
 
         user = User.objects.get(username=request.user.username)
 
