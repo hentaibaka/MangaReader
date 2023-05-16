@@ -5,29 +5,13 @@
         <title>{{ title }}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        {% block style %}
 
+        {% block style %}
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% endblock %}
 
         {% block javascript %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        {% endblock %}
-
-        {% block javascript-filter %}
-        <!--js block for catalog page-->
-        {% endblock %}
-
-        {% block javascript-manga %}
-        <!--js block for manga page-->
-        {% endblock %}
-
-        {% block javascript-reader %}
-        <!--js block for reader page-->
-        {% endblock %}
-
-        {% block javascript-main %}
-        <!--js block for main page-->
         {% endblock %}
 
         {% block sessiondata %}

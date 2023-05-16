@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block style %}
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'css/style_main_page.css' %}">
 {% endblock %}
 
@@ -58,40 +59,4 @@
     {% endfor %}
     </div>
     </div>
-    <!--<h1>Недавно обновлённое</h1>
-    {% for manga in updated %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Обложка</td>
-                <td><img src="{{ manga.photo.url }}"></img></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ manga.description }}</td>
-            </tr>
-        </table>
-    {% endfor %}
-
-    <h1>Новое</h1>
-    {% for manga in new %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Обложка</td>
-                <td><img src="{{ manga.photo.url }}"></img></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ manga.description }}</td>
-            </tr>
-        </table>
-    {% endfor %}
-    -->
 {% endblock %}

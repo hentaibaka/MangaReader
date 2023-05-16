@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
 
-{% block javascript-manga %}
+{% block javascript %}
 
+    {{ block.super }}
     {% load static %}
     <script type="text/javascript" src={% static "js/mark.js" %}></script>
     <script type="text/javascript" src={% static "js/list.js" %}></script>
