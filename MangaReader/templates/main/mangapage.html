@@ -1,11 +1,34 @@
 {% extends 'base/base.html' %}
 
+{% block javascript-manga %}
+
+    {% load static %}
+    <script type="text/javascript" src={% static "js/mark.js" %}></script>
+    <script type="text/javascript" src={% static "js/list.js" %}></script>
+
+{% endblock %}
+
+{% block pagedata %}
+    {{ manga.id|json_script:"manga_id" }}
+{% endblock %}
+
 {% block content %}
 
     <table>
         <tr>
             <td>Название</td>
             <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
+        </tr>
+        <tr>
+            <td>Оценка</td>
+            <!--id мне нужен чтобы через js менять значение через ajax-->
+            {% load floattags %}
+            <td id="mark">{{ manga.mark|formatted_float }}</td>
+        </tr>
+        <tr>
+            <td>Кол-во оценок</td>
+            <!--id мне нужен чтобы через js менять значение через ajax-->
+            <td id="mark-count">{{ manga.mark_count }}</td>
         </tr>
         <tr>
             <td>Обложка</td>
@@ -17,11 +40,34 @@
         </tr>
     </table>
 
-    <form method="post", enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ listForm.as_p }}
-        <button type="submit">Сохранить</button>
-    </form>
+    {% if user.is_authenticated %}
+
+        <div id="listform-container">
+            <form id="listform" method="post", enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ listForm.as_p }}
+                <button id="listformsubmit" type="submit">Сохранить</button>
+                {% if isUserList %}
+                    <button id="listformcancel" type="cancel">Удалить из Списка</button>
+                {% else %}
+                    <button hidden id="listformcancel" type="cancel">Удалить из Списка</button>
+                {% endif %}
+            </form>
+        </div>
+        <div id="markform-container">
+            <form id="markform" method="post", enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ markForm.as_p }}
+                <button id="markformsubmit" type="submit">Сохранить</button>
+                {% if isUserMark %}
+                    <button id="markformcancel" type="cancel">Удалить Оценку</button>
+                {% else %}
+                    <button hidden id="markformcancel" type="cancel">Удалить Оценку</button>
+                {% endif %}
+            </form>
+        </div>
+    
+    {% endif %}
 
     <h2>Главы</h2>
     <ul>

@@ -11,7 +11,7 @@
 
     {% for photo in photos %}
 
-        <img src="{{ photo.photo.url }}"></img>
+        <img src="{{ photo.photo.url }}" loading='lazy'></img>
 
     {% endfor %}
 
