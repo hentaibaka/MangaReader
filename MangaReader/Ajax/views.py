@@ -12,6 +12,7 @@ class SetUserListView(View):
             try:
                 username = request.POST.get('user')
                 manga_id = int(request.POST.get('manga'))
+                print(request.POST.get('form[list]'))
                 userlist_id = int(request.POST.get('form[list]'))
 
                 user = User.objects.get(username=username)

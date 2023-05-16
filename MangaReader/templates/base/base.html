@@ -5,9 +5,9 @@
         <title>{{ title }}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        {% block style %}
 
+        {% block style %}
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
         {% endblock %}
 
         {% block javascript %}

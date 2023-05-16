@@ -120,23 +120,28 @@ class MangaPageView(View):
         except Chapter.DoesNotExist:
             chapters = [] 
 
-        user = User.objects.get(username=request.user.username)
+        listForm = UserListForm()
+        isUserList = False
 
-        try:
-            userlist = UserToManga.objects.get(user=user, manga=manga)
-            listForm = UserListForm(initial={'list': userlist.list})
-            isUserList = True
-        except UserToManga.DoesNotExist:
-            listForm = UserListForm()
-            isUserList = False
+        markForm = MarkForm()
+        isUserMark = False
 
-        try:
-            usermark = UserMarkToManga.objects.get(user=user, manga=manga)
-            markForm = MarkForm(initial={"mark": usermark.mark})
-            isUserMark = True
-        except UserMarkToManga.DoesNotExist:
-            markForm = MarkForm()
-            isUserMark = False
+        if request.user.is_authenticated:
+            user = User.objects.get(username=request.user.username)
+    
+            try:
+                userlist = UserToManga.objects.get(user=user, manga=manga)
+                listForm = UserListForm(initial={'list': userlist.list})
+                isUserList = True
+            except UserToManga.DoesNotExist:
+                pass
+    
+            try:
+                usermark = UserMarkToManga.objects.get(user=user, manga=manga)
+                markForm = MarkForm(initial={"mark": usermark.mark})
+                isUserMark = True
+            except UserMarkToManga.DoesNotExist:
+                pass
 
         context = {
             'title': manga.title,

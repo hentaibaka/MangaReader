@@ -29,7 +29,8 @@
         <tr>
             <td>Кол-во оценок</td>
             <!--id мне нужен чтобы через js менять значение через ajax-->
-            <td id="mark-count">{{ manga.mark_count }}</td>
+            {% load inttags %}
+            <td id="mark-count">{{ manga.mark_count|formatted_int }}</td>
         </tr>
         <tr>
             <td>Обложка</td>
