@@ -32,6 +32,9 @@ img{
     flex-wrap: nowrap;
     flex-direction: column;
 }
+.wrapper:last-child{
+    margin: 0;
+}
 
 @media screen and (max-width: 4000px){
     .wrapper{
@@ -89,6 +92,7 @@ body{
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 0 40px;
 
 }
 
