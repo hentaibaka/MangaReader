@@ -5,11 +5,13 @@
     <!--и чтобы шапка пряталась/появлялась при скролле вверх/вниз-->
     <!--скажешь если не сможешь чисто через  css/html сделать список глав-->
     <!--я попробую сделать тебе форму для этого-->
+    {{ block.super }}
     <a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a>
 {% endblock %}
+
 {% block content %}
 
-    {% for photo in photos %}
+    {% for photo in entries %}
 
         <img src="{{ photo.photo.url }}" loading='lazy'></img>
 

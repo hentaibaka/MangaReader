@@ -187,8 +187,9 @@ class ReaderPageView(View):
             'prevChapter': prevChapter,
             'nextChapter': nextChapter,
             'chapters': chapters,
-            'photos': photos,
+            'entries': photos,
             'mainmenu': MyView.menu,
+            'REQUEST': request,
         }
 
         return render(request, 'main/readerpage.html', context)
