@@ -11,19 +11,21 @@ class MarkForm(forms.ModelForm):
         exclude = ['user', 'manga']
 
 class FilterForm(forms.Form):
-    genre = forms.ModelMultipleChoiceField(Genre.objects.all(), required=False, label='Жанр')
-    type = forms.ModelMultipleChoiceField(Type.objects.all(), required=False, label='Тип')
-    status = forms.ModelMultipleChoiceField(Status.objects.all(), required=False, label='Статус Тайтла')
-    status_translate = forms.ModelMultipleChoiceField(Status.objects.all(), required=False, label='Статус Перевода')
+    genre = forms.ModelMultipleChoiceField(Genre.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, label='Жанр')
+    type = forms.ModelMultipleChoiceField(Type.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, label='Тип')
+    status = forms.ModelMultipleChoiceField(Status.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, label='Статус Тайтла')
+    status_translate = forms.ModelMultipleChoiceField(Status.objects.all(), widget=forms.CheckboxSelectMultiple(), required=False, label='Статус Перевода')
 
 class SortForm(forms.Form):
-    sort = forms.ChoiceField(choices=[
-        ('mark_count', 'Количество оценок'),
+    sort = forms.ChoiceField(choices=(ch:=[
         ('mark', 'Оценке'),
+        ('mark_count', 'Количество оценок'),
         ('date_add', 'Дате добавления'),
-        ('chapter_count', 'Количеству глав'),
-    ], required=False, label='Сортировать по')
-    order = forms.ChoiceField(choices=[
-        ('a', 'По возрастанию'),
-        ('d', 'По убыванию')
-    ], required=False, label='Порядок сортировки')
+        ('chapter_count', 'Количеству глав')]), 
+        widget=forms.RadioSelect(), initial=ch[0],
+        required=False, label='Сортировать по')
+    order = forms.ChoiceField(choices=(ch:=[
+        ('d', 'По убыванию'),
+        ('a', 'По возрастанию')]), 
+        widget=forms.RadioSelect(), initial=ch[0],
+        required=False, label='Порядок сортировки')
