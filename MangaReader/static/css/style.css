@@ -10,6 +10,7 @@
 
 body{
     margin:0;
+    overflow-y: scroll;
 }
 
 .header a:hover {
@@ -152,4 +153,5 @@ body{
     border-radius: 8px;
     border: 3px solid 918e8e;
 }
+
 

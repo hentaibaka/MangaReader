@@ -1,35 +1,55 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block style %}
+{{ block.super }}
 <link rel="stylesheet" href="{% static 'css/style_user.css' %}">
 {% endblock %}
 
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'js/tabs.js' %}"></script>
+{% endblock %}
+
 {% block content %}
-    <h1>{{ user.username }}</h1>
-    
-    {% for list, mangaList in lists.items %}
+    <h1  style="text-align: center; padding: 30px 0 10px; color: white; font-weight: 500;">{{ user.username }}</h1>
+    <div style="display: flex; justify-content: center; padding: 10px 0;">
+        <a href="#" style="text-decoration: none;">🔆</a>
+        <a href="#" style="text-decoration: none;">🌙</a>
+    </div>
+   
+    <div class="wrapper">
+        <div class="tabs">
+            <div class="tabs_nav">
+                {% for list, mangaList in lists.items %}
+                    <button class="tabs_nav_btn" type="button" data-tab="value">{{ list.name }}</button>
+                {% endfor %}
+            </div>
 
-        <h3>{{ list.name }}</h3>
+            <div class="tabs_content">
+                {% for list, mangaList in lists.items %}
 
-        {% for user2manga in mangaList %}
-        
-            <table>
-                <tr>
-                    <td>Название</td>
-                    <td><a href="{% url 'mangapage' mangaSlug=user2manga.manga.slug %}">{{ user2manga.manga.title }}</a></td>
-                </tr>
-                <tr>
-                    <td>Обложка</td>
-                    <td><img src="{{ user2manga.manga.photo.url }}"></img></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>{{ user2manga.manga.description }}</td>
-                </tr>
-            </table>
+                <div class="tabs_item">
 
-        {% endfor %}
+                    {% for user2manga in mangaList %}
+                        
+                        {% if user2manga is not null %}
+                            <a class="block_manga" href="{% url 'mangapage' mangaSlug=user2manga.manga.slug %}">
+                                <div class="image" style="background-image: url({{user2manga.manga.photo.url}});">
+                                    <h4 class="manga_title">
+                                        {{ user2manga.manga.title }}
+                                    </h4>
+                                </div>
+                            </a>   
+                        {% else %}
+                            <div>No content</p>
+                        {% endif %}
+                            
+                    {% endfor %}
 
-    {% endfor %}
+                </div>
+                {% endfor %}
 
+            </div>
+        </div>
+    </div>
 {% endblock %}
