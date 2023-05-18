@@ -11,13 +11,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1  style="text-align: center; padding: 30px 0 10px; color: white; font-weight: 500;">{{ user.username }}</h1>
+    <h1  style="text-align: center; padding: 30px 0 10px; font-weight: 500;">{{ user.username }}</h1>
     <div style="display: flex; justify-content: center; padding: 10px 0;">
         <a href="#" style="text-decoration: none;">🔆</a>
         <a href="#" style="text-decoration: none;">🌙</a>
     </div>
    
-    <div class="wrapper">
+    <div class="wrapper_user">
         <div class="tabs">
             <div class="tabs_nav">
                 {% for list, mangaList in lists.items %}

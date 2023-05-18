@@ -1,5 +1,4 @@
 body{
-    background-color: rgb(51, 50, 50);
     height: 100%;
     padding: 0 0 40px;
 }
@@ -46,7 +45,6 @@ body{
 
 .tabs_content{
     padding: 15px 30px 30px;
-    background-color: rgb(122, 120, 120);
     border-radius: 10px;
     width: 63.5%;
     margin: 5px auto;
@@ -65,8 +63,6 @@ body{
     cursor: pointer;
     border-radius: 8px;
     margin: 0 1px;
-    background-color: rgb(51, 50, 50);
-    color: white;
 }
 
 .tabs_nav_btn:last-child{
