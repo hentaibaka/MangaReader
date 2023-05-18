@@ -91,7 +91,7 @@ class CatalogPageView(View):
 
         filterForm = FilterForm()
         sortForm = SortForm()
-        mangaList = Manga.objects.all()
+        mangaList = Manga.objects.all().order_by('-mark')
 
         context = {
             'title': 'Каталог',

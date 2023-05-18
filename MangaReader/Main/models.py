@@ -10,7 +10,7 @@ class List(models.Model):
         verbose_name = 'Список'
 
     def __str__(self) -> str:
-        return f"Список: {self.name}"
+        return self.name
     
 class Type(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Тип")
@@ -20,7 +20,7 @@ class Type(models.Model):
         verbose_name = 'Тип'
 
     def __str__(self) -> str:
-        return f"Тип: {self.name}"
+        return self.name
 
 class Status(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Статус")
@@ -30,7 +30,7 @@ class Status(models.Model):
         verbose_name = 'Статус'
 
     def __str__(self) -> str:
-        return f"Статус: {self.name}"
+        return self.name
 
 class Genre(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Жанр")
@@ -40,7 +40,7 @@ class Genre(models.Model):
         verbose_name = 'Жанр'
 
     def __str__(self) -> str:
-        return f"Жанр: {self.name}" 
+        return self.name
     
 class Manga(models.Model):
     slug = models.SlugField(unique=True) 
