@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Main',
     'Ajax',
-    'endless_pagination',
 ]
 
 MIDDLEWARE = [
@@ -153,12 +152,3 @@ CACHES = {
 # django-celery-beat
 
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-
-#django-endless-pagination
-
-from django.conf import global_settings
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.request',
-)
-
-

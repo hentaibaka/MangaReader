@@ -6,6 +6,30 @@ from django.db.models import *
 from django.contrib.auth.models import User
 
 
+class LoadPagesView(View):
+    def get(self, request):
+        start = int(request.GET.get("start") or 0)
+        end = int(request.GET.get("end") or start + 4)
+
+        try:
+            chapter_id = int(request.GET.get("chapter_id"))
+        except Exception as ex:
+            print(ex)
+            return JsonResponse({}, status=400)
+        
+        try:
+            chapter = Chapter.objects.get(pk=chapter_id)
+        except Chapter.DoesNotExist:
+            return JsonResponse({}, status=400)
+
+        pages = ChapterToPhoto.objects.filter(chapter=chapter, number__in=list(range(start+1, end+2))).order_by("number")
+
+        return JsonResponse(
+            {
+            "pages": list(pages.values()),
+            "exists": pages.exists(),
+            }, status=200)
+
 class SetUserListView(View):
     def post(self, request):
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':

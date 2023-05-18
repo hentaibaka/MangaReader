@@ -1,5 +1,18 @@
 {% extends 'base/base.html' %}
 
+{% block javascript %}
+    {{ block.super }}
+    {% load static %}
+    <script type="text/javascript" src={% static "js/endless-pagination.js" %}></script>
+
+{% endblock %}
+
+{% block sessiondata %}
+    {{ block.super }}
+    {{ chapter.id|json_script:"chapter_id" }}
+
+{% endblock %}
+
 {% block header %}
     <!--нужно сделать кастомную шапку с ссылкой на мангу и выпадающим списком глав-->
     <!--и чтобы шапка пряталась/появлялась при скролле вверх/вниз-->
@@ -10,12 +23,13 @@
 {% endblock %}
 
 {% block content %}
+    <div id='container-pages'>
+        {% for photo in photos %}
 
-    {% for photo in entries %}
+            <img src="{{ photo.photo.url }}" loading='lazy'></img>
 
-        <img src="{{ photo.photo.url }}" loading='lazy'></img>
-
-    {% endfor %}
+        {% endfor %}
+    </div>
 
     {% if prevChapter %}
         <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=prevChapter.number%}">Предыдущая</a>
