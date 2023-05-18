@@ -141,13 +141,14 @@ class DeleteUserMarkView(View):
 
 class FilterView(View):
     def post(self, request):
+        print(request.POST)
         try: 
             if (g:=request.POST.getlist('genre')):
                 genre = [Genre.objects.get(pk=id) for id in map(int, g)]
             else:
                 genre = []
 
-            if (t:=request.POST.getlist('ttype')):
+            if (t:=request.POST.getlist('type')):
                 ttype = list(map(int, t))
             else:
                 ttype = Type.objects.all()

@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     form = document.querySelector('#filterform');
+
+    container = document.querySelector("#manga-container")
     
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -15,15 +17,29 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             url: '/ajax/filter/',
             success: function(response) {
-                container = document.querySelector('#manga-container');
                 container.innerHTML = '';
 
                 response.mangaList.forEach(function (item) {
                     console.log(item);
-                    //ну тут типа будет код для создания манги и добавления её в контейнер
-                    //сделаю как ты сделаешь шаблон манги на странице каталога
-                    //пока смотри в консоли лол
-                    //)))0000)00)0000000)00))000000)0)0)00)))00))0
+                    const a = document.createElement("a");
+
+                    a.href = '/manga/' + item.slug;
+                    a.classList.add("block_manga");
+
+                    const div = document.createElement("div");
+                    
+                    div.style = "background-image: url(/media/" + item.photo + ");";
+                    div.classList.add("image")
+
+                    const h4 = document.createElement("h4");
+
+                    h4.innerHTML = item.title;
+                    h4.classList.add("manga_title");
+
+                    div.appendChild(h4);
+                    a.appendChild(div);
+
+                    container.appendChild(a);
                 });
             },
             error: function(response) {
