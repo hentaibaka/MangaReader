@@ -6,7 +6,7 @@ import operator
 from .forms import *
 
 
-MAINPAGE_MANGA_COUNT = 6
+MAINPAGE_MANGA_COUNT = 8
 MAINPAGE_MANGA_TIMEOUT = 5 * 60
 
 class MyView:
