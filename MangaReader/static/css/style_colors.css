@@ -1,0 +1,22 @@
+.wrapper{
+    background-color:rgb(32, 30, 30) ;
+}
+
+body{
+    background-color: rgb(51, 50, 50);
+}
+
+h1{
+    color: white;
+}
+
+.tabs_content{
+    background-color: rgb(120, 120, 120);
+}
+.tabs_nav_btn{
+    background-color: rgb(51, 50, 50);
+    color: white;
+}
+.menu{
+    background-color: rgb(64, 64, 64);
+}

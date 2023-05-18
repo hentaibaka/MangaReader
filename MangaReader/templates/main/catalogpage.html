@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block javascript %}
 
     {{ block.super }}
@@ -8,45 +8,63 @@
     
 {% endblock %}
 
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/style_catalog.css' %}">
+{% endblock %}
+
 {% block content %}
+    <div class="content">
+        <div class="menu">
+            <form id="filterform" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="filter" style="color:white">
+                        <div class="filter_item"> 
+                            <div class="text"> Жанр </div> 
+                            <div>{{ filterForm.genre }}</div>
+                        </div> 
+                        <div>
+                            <div class="filter_item"> 
+                                <div class="text"> Тип </div> 
+                                <div>{{ filterForm.type }}</div>
+                            </div> <br>
+                            <div class="filter_item"> 
+                                <div class="text"> Статус тайтла </div> 
+                                <div>{{ filterForm.status }}</div>
+                            </div> <br>
+                            <div class="filter_item"> 
+                                <div class="text"> Статус перевода </div> 
+                                <div>{{ filterForm.status_translate }}</div>
+                            </div>
+                        </div>
+                </div>
+                <br>
+                <div class="sort" style="color:white">
+                    <div class="sort_item">
+                        <div class="text"> Сортировать по</div>
+                        <div>{{ sortForm.sort }}</div>
+                        <div style="padding-top: 15px;">{{ sortForm.order }}</div>
+                    </div>
+                </div> <br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit">Применить</button>
+                </div>
+                
+            </form> 
+        </div>
 
-    <form id="filterform" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ filterForm.as_p }}
-        {{ sortForm.as_p }}
-        <button type="submit">Применить</button>
-    </form> 
-
-    <div id='manga-container'>
+    <div class="wrapper" id='manga-container'>
 
         {% for manga in mangaList %}
-
-            <table>
-                <tr>
-                    <td>Название</td>
-                    <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-                </tr>
-                <tr>
-                    <td>Оценка</td>
-                    {% load floattags %}
-                    <td>{{ manga.mark|formatted_float }}</td>
-                </tr>
-                <tr>
-                    <td>Кол-во оценок</td>
-                    <td>{{ manga.mark_count }}</td>
-                </tr>
-                <tr>
-                    <td>Обложка</td>
-                    <td><img src="{{ manga.photo.url }}"></img></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>{{ manga.description }}</td>
-                </tr>
-            </table>
-
+        <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
+            <div class="image" style="background-image: url({{manga.photo.url}});">
+                <h4 class="manga_title">
+                    {{ manga.title }}
+                </h4>
+            </div>
+        </a> 
         {% endfor %}
 
     </div>
-
+    </div>
 {% endblock %}
