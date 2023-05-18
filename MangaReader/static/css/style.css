@@ -98,6 +98,9 @@ body{
     display: flex !important;
 }
 @media (max-width: 750px){
+    .js-scroll{
+        display: none;
+    }
     .burger{
         display: flex;
     }
@@ -154,4 +157,12 @@ body{
     border: 3px solid 918e8e;
 }
 
+.js-scroll{
+    position: fixed;
+    bottom:10px;
+    right:10px;
+}
+.js-scroll.d-none{
+    display: none;
+}
 

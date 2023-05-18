@@ -1,8 +1,12 @@
+.open{
+    display: flex !important;
+}
 .content{
-    display: inline-flex;
+    display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    margin: 75px 0 0;
+    margin: 75px 0 0 10px;
+    align-self: center;
 }
 .menu{
     margin: 0 15px 0 15px;
@@ -15,7 +19,8 @@
     align-items: center;
     position: sticky;
     float: right;
-    top: 80px;
+    top: 50px;
+    
 }
 .text{
     padding-bottom: 4px;
@@ -27,8 +32,9 @@
     display: flex;
 }
 .wrapper{
-    width: 63.7%;
+    width: 1135px;
     padding: 20px;
+    margin: 0 auto 30px;
     display: inline-flex;
     flex-wrap: wrap;
     border: 1px solid black;
@@ -85,4 +91,72 @@ button{
 button:hover{
     background-color: rgb(219, 217, 217);
     cursor: pointer;
+}
+.mobile_button{
+    display: none;
+}
+@media screen and (max-width: 1500px){
+    .wrapper{
+        max-width: 945px;
+    }
+}
+@media screen and (max-width: 1300px){
+    .wrapper{
+        max-width: 758px;
+    }
+}
+@media screen and (max-width: 1110px){
+    .wrapper{
+        max-width: 568px;
+    }
+}
+@media screen and (max-width: 920px){
+    .menu{
+        display: none;
+        position: fixed;
+        right: 0;
+        margin-right: 0;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        animation: menuAnimation 0.3s;
+    }
+    .mobile_button{
+        display: flex;
+        width: 100%;
+        position: fixed;
+        z-index: 52;
+        bottom: 0;
+        justify-content: center;
+    }
+    .wrapper{
+        margin: 0 10px 0 0;
+        padding: 8px
+    }
+    .image{
+        min-width: 130px;
+        min-height: 190px;
+    }
+    .block_manga{
+        width: 130px;
+        height: 190px;
+        padding: 5px
+    }
+
+}
+@media screen and (max-width: 600px){
+    .wrapper{
+        max-width: 420px;
+    }
+
+}
+@media screen and (max-width: 460px){
+    .wrapper{
+        max-width: 280px;
+    }
+
+}
+@keyframes menuAnimation{
+    from {opacity: 0;}
+    to {opacity: 1;}
 }

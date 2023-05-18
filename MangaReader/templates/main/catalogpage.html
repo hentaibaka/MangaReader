@@ -67,4 +67,18 @@
 
     </div>
     </div>
+    <a class="js-scroll d-none" style="border: none">
+        <img style="height: 35px; width: 35px" src="{% static 'image/up-arrow.png' %}" alt="#">
+    </a>
+
+    <div class="mobile_button">
+        <button style="max-width: 200px;">
+                Отфильтровать
+        </button>
+    </div>
+    <script>
+        document.querySelector('.mobile_button').addEventListener('click', function(){
+            document.querySelector('.menu').classList.toggle('open');
+        })
+    </script>
 {% endblock %}
