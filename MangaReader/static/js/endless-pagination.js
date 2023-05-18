@@ -4,10 +4,13 @@ const quantity = 5;
 
 let exists = true;
 
+//поменять если не подгружает
+const offsetParam = 10;
+
 document.addEventListener('DOMContentLoaded', load);
 
 window.onscroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - offsetParam) {
         load();
     };
 };
