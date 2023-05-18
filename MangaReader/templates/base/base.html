@@ -18,9 +18,6 @@
         {% block sessiondata %}
             <!--нужно, чтобы можно было получать доступ к параметрам из реквеста-->
             {{ request.user.username|json_script:"username" }}
-            {% block pagedata %}
-
-            {% endblock %}
         
         {% endblock %}
 

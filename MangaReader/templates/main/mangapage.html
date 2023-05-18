@@ -9,7 +9,8 @@
 
 {% endblock %}
 
-{% block pagedata %}
+{% block sessiondata %}
+    {{ block.super }}
     {{ manga.id|json_script:"manga_id" }}
 {% endblock %}
 

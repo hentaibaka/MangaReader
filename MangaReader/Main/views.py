@@ -78,7 +78,7 @@ class MainPageView(View):
         }
         
         return render(request, 'main/mainpage.html', context)
-    
+   
 class CatalogPageView(View):
     def get(self, request):
         """
@@ -101,7 +101,6 @@ class CatalogPageView(View):
             'mainmenu': MyView.menu,
         }
         return render(request, 'main/catalogpage.html', context)
-
 
 class MangaPageView(View):
     def get(self, request, mangaSlug):
@@ -194,7 +193,7 @@ class ReaderPageView(View):
             'prevChapter': prevChapter,
             'nextChapter': nextChapter,
             'chapters': chapters,
-            'entries': photos,
+            'photos': [],#photos,
             'mainmenu': MyView.menu,
             'REQUEST': request,
         }
@@ -217,7 +216,6 @@ class UserPageView(View):
         manga2list = [UserToManga.objects.filter(user=user, list=l) for l in lists]
 
         userLists = dict(zip(lists, manga2list))
-        print(userLists)
 
         context = {
             'title': user.username,
