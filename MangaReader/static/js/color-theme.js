@@ -1,4 +1,11 @@
 const THEME_COOKIE_MAX_AGE = 7 * 24 * 60 * 60;
+const THEME_COOKIE_NAME = 'theme';
+
+const LIGHT_THEME_CLASS = 'light';
+const DARK_THEME_CLASS = 'dark';
+const CHANGING_THEME_CLASS = 'changing-color';
+
+const DEFAULT_THEME = LIGHT_THEME_CLASS;
 
 
 function getCookie(name) {
@@ -34,9 +41,9 @@ function deleteCookie(name) {
 
 function changeThemeCookie(isDark) {
     if (isDark) {
-        setCookie('theme', 'dark', {'max-age': THEME_COOKIE_MAX_AGE});
+        setCookie(THEME_COOKIE_NAME, DARK_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE});
     } else {
-        setCookie('theme', 'light', {'max-age': THEME_COOKIE_MAX_AGE});
+        setCookie(THEME_COOKIE_NAME, LIGHT_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE});
     };
 }
 
@@ -45,34 +52,34 @@ function changeTheme(isDark) {
     //удалить у каждого классы dark light
     //добавить класс dark или light
 
-    let elems = document.querySelectorAll('.changing-color');
+    let elems = document.querySelectorAll('.' + CHANGING_THEME_CLASS);
 
     elems.forEach((elem) => {
-        elem.classList.remove('dark');
-        elem.classList.remove('light');
+        elem.classList.remove(DARK_THEME_CLASS);
+        elem.classList.remove(LIGHT_THEME_CLASS);
     });
 
     if (isDark) {
         elems.forEach((elem) => {
-            elem.classList.add('dark');
+            elem.classList.add(DARK_THEME_CLASS);
         });
     } else {
         elems.forEach((elem) => {
-            elem.classList.add('light');
+            elem.classList.add(LIGHT_THEME_CLASS);
         });
     };
 }
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    let theme_cookie = getCookie('theme');
+    let theme_cookie = getCookie(THEME_COOKIE_NAME);
     
     if (theme_cookie != undefined) {
-        changeThemeCookie(theme_cookie == 'dark');
-        changeTheme(theme_cookie == 'dark');
+        changeThemeCookie(theme_cookie == DARK_THEME_CLASS);
+        changeTheme(theme_cookie == DARK_THEME_CLASS);
     } else {
-        changeThemeCookie(false);
-        changeTheme(false);
+        changeThemeCookie(DEFAULT_THEME == DARK_THEME_CLASS);
+        changeTheme(DEFAULT_THEME == DARK_THEME_CLASS);
     }
 
     let light_btn = document.querySelector('#light-theme-btn');
