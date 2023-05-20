@@ -1,0 +1,36 @@
+a.chap{
+    text-decoration: none;
+    font-size: larger;
+    font-weight: 500;
+    color:rgb(219, 216, 216);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: rgb(68, 67, 67);
+    margin:5px;
+    text-align: center;
+}
+a.chap:hover{
+   background-color: rgb(87, 87, 87);
+   color: rgb(237, 237, 237);
+}
+a.chap.none{
+    background-color: rgba(68, 67, 67, 0.85);
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+    img{
+        min-width: 85%;
+    }
+}
+@media screen and (max-width: 750px) {
+    img{
+        min-width: 100%;
+    }
+}

@@ -53,6 +53,14 @@ function add_page(content) {
     const pagediv = document.createElement('div');
     const img = document.createElement('img');
     img.src = '/media/' + content.photo;
+
+    pagediv.style.display = 'flex';
+    pagediv.style.justifyContent = 'center';
+    pagediv.style.padding = '0 10px';
+
+
+    img.style.width = '60%';
+
     pagediv.appendChild(img);
     document.querySelector('#container-pages').append(pagediv);
 };
