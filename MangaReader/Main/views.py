@@ -193,7 +193,7 @@ class ReaderPageView(View):
             'prevChapter': prevChapter,
             'nextChapter': nextChapter,
             'chapters': chapters,
-            'photos': [],#photos,
+            'photos': photos,
             'mainmenu': MyView.menu,
             'REQUEST': request,
         }
