@@ -23,8 +23,16 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             url: '/ajax/setusermark/',
             success: function(response) {
-                mark.innerHTML = response.mark;
-                mark_count.innerHTML = response.mark_count;
+                mark_count = response.mark_count;
+                if (mark_count > 1000) {
+                    mark_count = (mark_count / 1000).toFixed(1);
+                    if (mark_count == Math.round(mark_count)) {
+                        mark_count = Math.round(mark_count);
+                    }
+                }
+
+                mark.innerHTML = '⭐' + response.mark;
+                mark_count.innerHTML = mark_count + 'К';
                 markcancelbtn.hidden = false;
             },
             error: function(response) {
@@ -49,8 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
             type: 'POST',
             url: '/ajax/deleteusermark/',
             success: function(response) {
-                mark.innerHTML = response.mark;
-                mark_count.innerHTML = response.mark_count;
+                mark_count = response.mark_count;
+                if (mark_count > 1000) {
+                    mark_count = (mark_count / 1000).toFixed(1);
+                    if (mark_count == Math.round(mark_count)) {
+                        mark_count = Math.round(mark_count);
+                    }
+                }
+                mark.innerHTML = '⭐' + response.mark;
+                mark_count.innerHTML = mark_count + 'К';
                 markcancelbtn.hidden = true;
             },
             error: function(response) {
