@@ -41,9 +41,9 @@ function deleteCookie(name) {
 
 function changeThemeCookie(isDark) {
     if (isDark) {
-        setCookie(THEME_COOKIE_NAME, DARK_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE});
+        setCookie(THEME_COOKIE_NAME, DARK_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE, path: '/'});
     } else {
-        setCookie(THEME_COOKIE_NAME, LIGHT_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE});
+        setCookie(THEME_COOKIE_NAME, LIGHT_THEME_CLASS, {'max-age': THEME_COOKIE_MAX_AGE, path: '/'});
     };
 }
 
