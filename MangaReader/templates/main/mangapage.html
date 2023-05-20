@@ -6,7 +6,7 @@
     {% load static %}
     <script type="text/javascript" src={% static "js/mark.js" %}></script>
     <script type="text/javascript" src={% static "js/list.js" %}></script>
-
+    <script src="{% static 'js/tabs.js' %}"></script>
 {% endblock %}
 
 {% block sessiondata %}
@@ -14,41 +14,25 @@
     {{ manga.id|json_script:"manga_id" }}
 {% endblock %}
 
+{% block style %}
+    {{ block.super }}
+    <!--<link rel="stylesheet" href="{% static 'css/style_user.css' %}">-->
+    <link rel="stylesheet" href="{% static 'css/style_manga.css' %}">
+{% endblock %}
+
 {% block content %}
-
-    <table>
-        <tr>
-            <td>Название</td>
-            <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-        </tr>
-        <tr>
-            <td>Оценка</td>
-            <!--id мне нужен чтобы через js менять значение через ajax-->
-            {% load floattags %}
-            <td id="mark">{{ manga.mark|formatted_float }}</td>
-        </tr>
-        <tr>
-            <td>Кол-во оценок</td>
-            <!--id мне нужен чтобы через js менять значение через ajax-->
-            {% load inttags %}
-            <td id="mark-count">{{ manga.mark_count|formatted_int }}</td>
-        </tr>
-        <tr>
-            <td>Обложка</td>
-            <td><img src="{{ manga.photo.url }}"></img></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>{{ manga.description }}</td>
-        </tr>
-    </table>
-
-    {% if user.is_authenticated %}
+    <div class="container wrapper">
+        <div class="title">
+            <div class="block_manga">
+                <div class="image" style="background-image: url({{manga.photo.url}});">
+                </div>
+            </div>
+            {% if user.is_authenticated %}
 
         <div id="listform-container">
             <form id="listform" method="post", enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ listForm.as_p }}
+                {% csrf_token %}    
+                {{ listForm.list }}
                 <button id="listformsubmit" type="submit">Сохранить</button>
                 {% if isUserList %}
                     <button id="listformcancel" type="cancel">Удалить из Списка</button>
@@ -60,7 +44,7 @@
         <div id="markform-container">
             <form id="markform" method="post", enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ markForm.as_p }}
+                {{ markForm.mark }}
                 <button id="markformsubmit" type="submit">Сохранить</button>
                 {% if isUserMark %}
                     <button id="markformcancel" type="cancel">Удалить Оценку</button>
@@ -71,12 +55,50 @@
         </div>
     
     {% endif %}
+        </div>
+        <div class="cont" style="width: 850px; margin-left: 10px;">
+        <div class="title_head">
+            <h1>{{ manga.title }}</h1>
+            <div class="mark_info">
+                <div class="title_mark">
+                    <!--id мне нужен чтобы через js менять значение через ajax-->
+                    {% load floattags %}
+                    <h4 id="mark">⭐{{ manga.mark|formatted_float }}</h4>
+                </div>
+                <div class="count_mark">
+                    <!--id мне нужен чтобы через js менять значение через ajax-->
+                    {% load inttags %}
+                    <h4 id="mark-count"> {{ manga.mark_count|formatted_int }}</h4>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="tabs_nav">
+                    <button class="tabs_nav_btn" type="button" data-tab="value">Описание</button>
+                    <button class="tabs_nav_btn" type="button" data-tab="value">Главы</button>
+                </div>
+                <div class="tabs_content">
+                    <div class="tabs_item">
+                        <h4>{{ manga.description }}</h4>
+                    </div>
+                    <div class="tabs_item">
+                        {% for chapter in chapters %}
+                            <div style="display: inline-flex; justify-content: space-between;">
+                                <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=chapter.number %}">Глава {{ chapter.number }} {{ chapter.name }}</a> 
+                                <span>{{ chapter.date_add }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 
-    <h2>Главы</h2>
-    <ul>
-        {% for chapter in chapters %}
-            <li><a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=chapter.number %}">{{ chapter.number }} {{ chapter.name }} {{ chapter.date_add }}</a></li>
-        {% endfor %}
-    </ul>
+   
+            
+
+
+
 
 {% endblock %}
