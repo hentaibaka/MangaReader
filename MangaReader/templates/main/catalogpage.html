@@ -53,7 +53,7 @@
             </form> 
         </div>
 
-    <div class="wrapper" id='manga-container'>
+    <div class="wrapper changing-color" id='manga-container'>
 
         {% for manga in mangaList %}
         <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
@@ -67,7 +67,7 @@
 
     </div>
     </div>
-    <a class="js-scroll d-none" style="border: none">
+    <a class="js-scroll d-none" style="border: none; cursor: pointer;">
         <img style="height: 35px; width: 35px" src="{% static 'image/up-arrow.png' %}" alt="#">
     </a>
 

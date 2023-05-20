@@ -124,14 +124,15 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 3px 0px;
+        padding: 3px 10px;
         justify-content: center;
     }
     .nav ul{
         display:block;   
     }
     .nav .block_left, .nav .block_right{
-        display:grid;
+        display:flex;
+        flex-direction: column;
         width: 100%;
         justify-content: center;
         align-items: center;
@@ -165,5 +166,18 @@ body{
 }
 .js-scroll.d-none{
     display: none;
+}
+button{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(60, 60, 60);
+    color:white;
+
+}
+select{
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: rgb(60, 60, 60);
+    color:white;
 }
 

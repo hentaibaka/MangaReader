@@ -89,7 +89,6 @@ button{
     align-items: center;
 }
 button:hover{
-    background-color: rgb(219, 217, 217);
     cursor: pointer;
 }
 .mobile_button{

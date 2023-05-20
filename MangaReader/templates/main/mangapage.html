@@ -22,7 +22,7 @@
 
 
 {% block content %}
-    <div class="container wrapper">
+    <div class="container wrapper changing-color">
         <div class="title">
             <div class="block_manga">
                 <div class="image" style="background-image: url({{manga.photo.url}});">
@@ -36,9 +36,9 @@
                 {{ listForm.list }}
                 <button id="listformsubmit" type="submit">Сохранить</button>
                 {% if isUserList %}
-                    <button id="listformcancel" type="cancel">Удалить из Списка</button>
+                    <button id="listformcancel" type="cancel">Удалить</button>
                 {% else %}
-                    <button hidden id="listformcancel" type="cancel">Удалить из Списка</button>
+                    <button hidden id="listformcancel" type="cancel">Удалить</button>
                 {% endif %}
             </form>
         </div>
@@ -48,16 +48,16 @@
                 {{ markForm.mark }}
                 <button id="markformsubmit" type="submit">Сохранить</button>
                 {% if isUserMark %}
-                    <button id="markformcancel" type="cancel">Удалить Оценку</button>
+                    <button id="markformcancel" type="cancel">Удалить</button>
                 {% else %}
-                    <button hidden id="markformcancel" type="cancel">Удалить Оценку</button>
+                    <button hidden id="markformcancel" type="cancel">Удалить</button>
                 {% endif %}
             </form>
         </div>
     
     {% endif %}
         </div>
-        <div class="cont" style="width: 850px; margin-left: 10px;">
+        <div class="cont">
         <div class="title_head">
             <h1>{{ manga.title }}</h1>
             <div class="mark_info">
@@ -77,15 +77,20 @@
                     <button class="tabs_nav_btn" type="button" data-tab="value">Описание</button>
                     <button class="tabs_nav_btn" type="button" data-tab="value">Главы</button>
                 </div>
-                <div class="tabs_content">
+                <div class="tabs_content changing-color">
                     <div class="tabs_item">
                         <h4>{{ manga.description }}</h4>
                     </div>
                     <div class="tabs_item">
                         {% for chapter in chapters %}
-                            <div style="display: inline-flex; justify-content: space-between;">
+                            <div class="chapter_info">
+                            
                                 <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=chapter.number %}">Глава {{ chapter.number }} {{ chapter.name }}</a> 
-                                <span>{{ chapter.date_add }}</span>
+                                
+                                <div style="display: flex; white-space: nowrap; padding: 10px 0 0 20px ;">
+                                    <span>{{ chapter.date_add }}</span>
+                                </div>
+                                
                             </div>
                         {% endfor %}
                     </div>
@@ -95,11 +100,4 @@
         </div>
         </div>
     </div>
-
-   
-            
-
-
-
-
 {% endblock %}

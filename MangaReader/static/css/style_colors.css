@@ -1,19 +1,57 @@
-.wrapper{
+.wrapper.dark{
     background-color:rgb(32, 30, 30) ;
 }
+.wrapper.light{
+    background-color: rgb(128, 114, 114);
+}
 
-body{
+
+body.dark{
     background-color: rgb(51, 50, 50);
 }
 
-h1{
-    color: white;
+body.light{
+    background-color: rgb(187, 185, 185);
 }
 
-.tabs_content{
+h1.dark, h2.dark, h3.dark, h4.dark, h5.dark, h6.dark, p.dark{
+    color:white;
+}
+
+h1.light, h2.light, h3.light, h4.light, h5.light, h6.light, p.light{
+    color: black;
+}
+.tabs_nav_btn.dark:hover{
+    background-color: rgb(73, 73, 73);;
+}
+
+.tabs_nav_btn.dark.active{
+    background-color: rgb(60, 60, 60);;
+}
+
+.tabs_nav_btn.light{
+    background-color: rgb(187, 185, 185);
+    color: black;
+}
+
+.tabs_nav_btn.light:hover{
+    background-color: rgb(128, 126, 126);
+}
+
+.tabs_nav_btn.light.active{
+    background-color: rgb(158, 155, 155);;
+}
+
+
+
+
+.tabs_content.dark{
     background-color: rgb(120, 120, 120);
 }
-.tabs_nav_btn{
+.tabs_content.light{
+    background-color: rgb(54, 54, 54);
+}
+.tabs_nav_btn.dark{
     background-color: rgb(51, 50, 50);
     color: white;
 }
@@ -26,4 +64,14 @@ h1{
 
 h4{
     color: white;
+}
+button:hover{
+    background-color: rgb(73, 73, 73);
+}
+select:hover{
+    background-color: rgb(73, 73, 73);
+}
+select {
+    appearance: none;
+    text-align: center;
 }

@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1  style="text-align: center; padding: 30px 0 10px; font-weight: 500;">{{ user.username }}</h1>
+    <h1  class="changing-color" style="text-align: center; padding: 30px 0 10px; font-weight: 500;">{{ user.username }}</h1>
     <div style="display: flex; justify-content: center; padding: 10px 0;">
         <a href="#" id="light-theme-btn" style="text-decoration: none;">🔆</a>
         <a href="#" id="dark-theme-btn" style="text-decoration: none;">🌙</a>
@@ -21,11 +21,11 @@
         <div class="tabs">
             <div class="tabs_nav">
                 {% for list, mangaList in lists.items %}
-                    <button class="tabs_nav_btn" type="button" data-tab="value">{{ list.name }}</button>
+                    <button class="tabs_nav_btn changing-color" type="button" data-tab="value">{{ list.name }}</button>
                 {% endfor %}
             </div>
 
-            <div class="tabs_content">
+            <div class="tabs_content changing-color">
                 {% for list, mangaList in lists.items %}
 
                 <div class="tabs_item">
