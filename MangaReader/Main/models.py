@@ -10,7 +10,7 @@ class List(models.Model):
         verbose_name = 'Список'
 
     def __str__(self) -> str:
-        return f"Список: {self.name}"
+        return self.name
     
 class Type(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Тип")
@@ -20,7 +20,7 @@ class Type(models.Model):
         verbose_name = 'Тип'
 
     def __str__(self) -> str:
-        return f"Тип: {self.name}"
+        return self.name
 
 class Status(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Статус")
@@ -30,7 +30,7 @@ class Status(models.Model):
         verbose_name = 'Статус'
 
     def __str__(self) -> str:
-        return f"Статус: {self.name}"
+        return self.name
 
 class Genre(models.Model):
     name = models.CharField(unique=True, max_length=32, verbose_name="Жанр")
@@ -40,7 +40,7 @@ class Genre(models.Model):
         verbose_name = 'Жанр'
 
     def __str__(self) -> str:
-        return f"Жанр: {self.name}" 
+        return self.name
     
 class Manga(models.Model):
     slug = models.SlugField(unique=True) 
@@ -50,6 +50,7 @@ class Manga(models.Model):
     date_release = models. DateField(verbose_name="Дата выхода")
     date_add = models. DateField(auto_now_add=True, verbose_name="Дата добавления")
     type = models.ForeignKey(Type, blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Тип") 
+    jenre = models.ManyToManyField(Genre, blank=True, verbose_name="Жанры")
     status = models.ForeignKey(Status, related_name='Status', blank=False, null=True, on_delete=models.SET_NULL, verbose_name='Статус тайтла')
     status_translate = models.ForeignKey(Status, related_name="Status_translate", blank=False, null=True, on_delete=models.SET_NULL, verbose_name="Статус перевода")
     mark = models.FloatField(default=0., verbose_name="Оценка") 
@@ -104,3 +105,28 @@ class UserToManga(models. Model):
 
     def __str__(self) -> str:
         return f"Манга: {self.manga}, Пользователь: {self.user}, Список: {self.list}"
+    
+class MarkChoices(models.IntegerChoices):
+    ONE = (1, "1")
+    TWO = (2, "2")
+    THREE = (3, "3")
+    FOUR = (4, "4")
+    FIVE = (5, "5")
+    SIX = (6, "6")
+    SEVEN = (7, "7")
+    EIGHT = (8, "8")
+    NINE = (9, "9")
+    TEN = (10, "10")
+
+class UserMarkToManga(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, on_delete=models.CASCADE, verbose_name="Пользователь")
+    manga = models.ForeignKey(Manga, blank=False, null=False, on_delete=models.CASCADE, verbose_name="Манга")
+    mark = models.IntegerField(choices=MarkChoices.choices, default=MarkChoices.ONE, blank=False, null=False, verbose_name="Оценка")
+
+    class Meta:
+        verbose_name_plural = 'Оценки пользователей'
+        verbose_name = 'Оценка пользователя'
+        unique_together = ('user', 'manga')
+
+    def __str__(self) -> str:
+        return f"Манга: {self.manga} Пользователь: {self.user} Оценка: {self.mark}"

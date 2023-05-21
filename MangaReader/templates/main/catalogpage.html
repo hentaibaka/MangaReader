@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block javascript %}
+
+    {{ block.super }}
+    {% load static %}
+    <script type="text/javascript" src={% static "js/filter.js" %}></script>
+    
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/style_catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="menu">
+            <form id="filterform" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="filter" style="color:white">
+                        <div class="filter_item"> 
+                            <div class="text"> Жанр </div> 
+                            <div>{{ filterForm.genre }}</div>
+                        </div> 
+                        <div>
+                            <div class="filter_item"> 
+                                <div class="text"> Тип </div> 
+                                <div>{{ filterForm.type }}</div>
+                            </div> <br>
+                            <div class="filter_item"> 
+                                <div class="text"> Статус тайтла </div> 
+                                <div>{{ filterForm.status }}</div>
+                            </div> <br>
+                            <div class="filter_item"> 
+                                <div class="text"> Статус перевода </div> 
+                                <div>{{ filterForm.status_translate }}</div>
+                            </div>
+                        </div>
+                </div>
+                <br>
+                <div class="sort" style="color:white">
+                    <div class="sort_item">
+                        <div class="text"> Сортировать по</div>
+                        <div>{{ sortForm.sort }}</div>
+                        <div style="padding-top: 15px;">{{ sortForm.order }}</div>
+                    </div>
+                </div> <br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit">Применить</button>
+                </div>
+                
+            </form> 
+        </div>
+
+    <div class="wrapper changing-color" id='manga-container'>
+
+        {% for manga in mangaList %}
+        <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
+            <div class="image" style="background-image: url({{manga.photo.url}});">
+                <h4 class="manga_title">
+                    {{ manga.title }}
+                </h4>
+            </div>
+        </a>
+        {% endfor %}
+
+    </div>
+    </div>
+    <a class="js-scroll d-none" style="border: none; cursor: pointer;">
+        <img style="height: 35px; width: 35px" src="{% static 'image/up-arrow.png' %}" alt="#">
+    </a>
+
+    <div class="mobile_button">
+        <button style="max-width: 200px;">
+                Отфильтровать
+        </button>
+    </div>
+    <script>
+        document.querySelector('.mobile_button').addEventListener('click', function(){
+            document.querySelector('.menu').classList.toggle('open');
+        })
+    </script>
+{% endblock %}

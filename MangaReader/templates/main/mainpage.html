@@ -1,59 +1,65 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block style %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/style_main_page.css' %}">
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }} 
+{% endblock %}
 
 {% block content %}
 
-    <h1>Популярное</h1>
+    <h1 style="align-self: center; padding: 40px 0 10px;">Популярное</h1>
+    <div class="wrapper changing-color">
+        
+    <div class="all_manga">
     {% for manga in popular %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Обложка</td>
-                <td><img src="{{ manga.photo.url }}"></img></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ manga.description }}</td>
-            </tr>
-        </table>
+        
+        <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
+            <div class="image" style="background-image: url({{manga.photo.url}});">
+                <h4 class="manga_title">
+                    {{manga.title}} 
+                </h4>
+            </div>
+        </a>
     {% endfor %}
-
-    <h1>Недавно обновлённое</h1>
+    </div>
+    </div>
+    
+    <h1 style="align-self: center; padding: 40px 0 10px;">Недавно обновлённые</h1>
+    <div class="wrapper changing-color">
+        
+    <div class="all_manga">
     {% for manga in updated %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Обложка</td>
-                <td><img src="{{ manga.photo.url }}"></img></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ manga.description }}</td>
-            </tr>
-        </table>
+        
+        <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
+            <div class="image" style="background-image: url({{manga.photo.url}});">
+                <h4 class="manga_title">
+                    {{manga.title}} 
+                </h4>
+            </div>
+        </a>
     {% endfor %}
+    </div>
+    </div>
 
-    <h1>Новое</h1>
+    <h1 style="align-self: center; padding: 40px 0 10px;">Новое</h1>
+    <div class="wrapper changing-color">
+        
+    <div class="all_manga">
     {% for manga in new %}
-        <table>
-            <tr>
-                <td>Название</td>
-                <td><a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Обложка</td>
-                <td><img src="{{ manga.photo.url }}"></img></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ manga.description }}</td>
-            </tr>
-        </table>
+        
+        <a class="block_manga" href="{% url 'mangapage' mangaSlug=manga.slug %}">
+            <div class="image" style="background-image: url({{manga.photo.url}});">
+                <h4 class="manga_title">
+                    {{manga.title}} 
+                </h4>
+            </div>
+        </a>
     {% endfor %}
-
+    </div>
+    </div>
 {% endblock %}

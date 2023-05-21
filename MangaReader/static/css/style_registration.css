@@ -1,0 +1,11 @@
+button{
+    padding: 3px 5px 3px 5px;
+}
+.block_column:nth-child(4){
+    margin-top: 0;
+    width: 85%;
+}
+.block_column:nth-child(5){
+    margin-top: 5px;
+    min-width: 45%;
+}

@@ -1,15 +1,44 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block header %}
 
 {% endblock %}
 
+{% block style %}
+ <link rel="stylesheet" href="{% static 'css/style_auth.css' %}">
+{% endblock %}
+  
 {% block content %}
-    <h2>Вход</h2>
+    <h1 style="text-align: center; margin-bottom: 0; padding-left: 10px; margin-top: -10%;">Авторизация</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Войти</button>
+        {% csrf_token %} 
+        <div class="wrapper">
+        <div class="container">
+        <div class="block_row">
+            <div class="block_column">
+                <a href="{% url 'main' %}" style="margin: 0;">
+                    <img class="rounded-circle" src="{% static 'image/go_main.png' %}" alt="Logo" width="18" height="18">
+                </a>
+            </div>
+            <div class="block_column">
+                <input type="text" name="username" autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" placeholder="Логин">
+            </div>
+            <div class="block_column">
+                <input type="password" name="password" autocomplete="current-password" required id="id_password" placeholder="Пароль">
+            </div>
+            <div class="block_column">
+                <button type="submit">Войти</button>
+            </div>
+            <div class="block_column" style="padding: 15px 3px 3px">
+                <p>Нет аккаунта?</p>
+                <a style="text-indent: 5px;" href="{% url 'signup' %}">Зарегистрироваться</a>
+            </div>
+        </div>
+        </div>
+        </div>
     </form>
-    <a href="{% url 'signup' %}">Регитсрация</a>
+
+    
+    
 {% endblock %}

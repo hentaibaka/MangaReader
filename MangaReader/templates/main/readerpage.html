@@ -1,33 +1,61 @@
 {% extends 'base/base.html' %}
 
+{% block javascript %}
+    {{ block.super }}
+    {% load static %}
+    <script type="text/javascript" src={% static "js/endless-pagination.js" %}></script>
+
+{% endblock %}
+
+{% block sessiondata %}
+    {{ block.super }}
+    {{ chapter.id|json_script:"chapter_id" }}
+
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/style_reader.css' %}">
+{% endblock %}
+
 {% block header %}
     <!--нужно сделать кастомную шапку с ссылкой на мангу и выпадающим списком глав-->
     <!--и чтобы шапка пряталась/появлялась при скролле вверх/вниз-->
     <!--скажешь если не сможешь чисто через  css/html сделать список глав-->
     <!--я попробую сделать тебе форму для этого-->
-    <a href="{% url 'mangapage' mangaSlug=manga.slug %}">{{ manga.title }}</a>
+    {{ block.super }}
 {% endblock %}
+
 {% block content %}
 
-    {% for photo in photos %}
+    <div class="pages" id='container-pages'>
 
-        <img src="{{ photo.photo.url }}"></img>
+            {% for photo in photos %}
 
-    {% endfor %}
+                <img class="image" src="{{ photo.photo.url }}" loading='lazy'></img>
 
-    {% if prevChapter %}
-        <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=prevChapter.number%}">Предыдущая</a>
-    {% else %}
-        <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
-        <!--Я в тебя верю, ты сможешь-->
-        <a href="">Предыдущая</a>
-    {% endif %}
+            {% endfor %}
 
-    {% if nextChapter %}
-        <a href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=nextChapter.number%}">Следующая</a>
-    {% else %}
-        <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
-        <a href="">Следующая</a> 
-    {% endif %}
+    </div>
+
+    <div class="buttons">
+        {% if prevChapter %}
+            <a class="chap" href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=prevChapter.number%}">Предыдущая глава</a>
+        {% else %}
+            <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
+            <!--Я в тебя верю, ты сможешь-->
+            <a class="chap none" style="pointer-events: none;">Предыдущая глава</a>
+        {% endif %}
+
+        {% if nextChapter %}
+            <a class="chap" href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=nextChapter.number%}">Следующая глава</a>
+        {% else %}
+            <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
+            <a class="chap" style="pointer-events: none;">Следующая глава</a> 
+        {% endif %}
+    </div>
+    <a class="js-scroll d-none" style="border: none; cursor: pointer;">
+        <img style="height: 35px; width: 35px" src="{% static 'image/up-arrow.png' %}" alt="#">
+    </a>
 
 {% endblock %}

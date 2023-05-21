@@ -1,0 +1,131 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+input{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    min-height: 65%;
+    min-width: 100%;
+    padding: 5px 0px 4px 5px;
+}
+input:hover{
+    box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+}
+button{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    min-height: 65%;
+    min-width: 100%;
+    padding: 3px 3px 3px 3px;
+    font-weight: bold;
+    font-size:small;
+    justify-content: center;
+    align-items: center;
+}
+button:hover{
+    box-shadow: 0px 0px 15px 0px rgba(34, 60, 80, 0.2);
+    cursor: pointer;
+}
+a{
+    text-decoration:none;
+    color: #006eff;
+}
+a:hover{
+    color:#015bd1;
+}
+.block_row{
+    display: flex;
+    border: 2px solid #ffffff;  
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+    padding: 5px 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px 0px rgba(34, 60, 80, 0.2);
+    
+}
+
+.block_column{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 85%;
+}
+
+.block_column:last-child{
+    padding: 0;
+    max-height: 30%;
+    margin-top: 10px;
+    margin: 0;
+}
+.block_column:first-child{
+    margin: 0;
+    padding: 3px 0 1px;
+    justify-content: flex-end;
+}
+.block_column:nth-child(4){
+    margin-top: 5px;
+    min-width: 45%;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 0px 10px;
+}
+@media (max-width: 1200px){
+    .container{
+        max-width: 970px;
+    }
+}
+@media (max-width: 992px){
+    .container{
+        max-width: 750px;
+    }
+}
+@media (max-width: 767px){
+    .container{
+        max-width: none;
+    }
+}
+.wrapper{
+    overflow: hidden;
+    min-height: 100%;
+    min-width: 100%;
+    padding: 3px 15px 15px 15px;  
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+img:hover{
+    transform: scale(1.03);
+}
+form{
+    display: flex;
+    justify-content: center;
+}
+
+body{
+    background-color: rgb(245, 243, 243);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+html{
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+}
+.footer{
+    display: none;
+}
