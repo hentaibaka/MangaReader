@@ -40,14 +40,12 @@ class MainPageView(View):
             'new': list[Manga],
         }
         """
-        popular = []
-        #popular = cache.get('popular')
+        popular = cache.get('popular')
         if not popular:
             popular = [m for m in Manga.objects.order_by('-mark_count')[:MAINPAGE_MANGA_COUNT]]
             cache.set('popular', popular, MAINPAGE_MANGA_TIMEOUT)
 
-        updated = []
-        #updated = cache.get('updated')
+        updated = cache.get('updated')
         if not updated:
             #переписать
             chapters = []
@@ -63,8 +61,7 @@ class MainPageView(View):
             updated = [ch.manga for ch in chapters[:MAINPAGE_MANGA_COUNT]]
             cache.set('updated', updated, MAINPAGE_MANGA_TIMEOUT)
         
-        new = []
-        #new = cache.get('new')
+        new = cache.get('new')
         if not new:
             new = Manga.objects.all().order_by('date_add')[::-1][:MAINPAGE_MANGA_COUNT]
             cache.set('new', new, MAINPAGE_MANGA_TIMEOUT)
