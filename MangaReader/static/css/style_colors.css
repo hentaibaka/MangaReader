@@ -2,7 +2,7 @@
     background-color:rgb(32, 30, 30) ;
 }
 .wrapper.light{
-    background-color: rgb(68, 68, 68);
+    background-color: rgb(97, 97, 97);
 }
 
 
@@ -30,21 +30,17 @@ h1.light, h2.light, h3.light, h4.light, h5.light, h6.light, p.light{
 }
 
 .tabs_nav_btn.light{
-    background-color: rgb(187, 185, 185);
-    color: black;
+    background-color: rgb(97, 97, 97);
+    color: white;
 }
 
 .tabs_nav_btn.light:hover{
-    background-color: rgb(128, 126, 126);
+    background-color: rgb(51, 51, 51);
 }
 
 .tabs_nav_btn.light.active{
-    background-color: rgb(158, 155, 155);;
+    background-color: rgb(65, 65, 65);
 }
-
-
-
-
 .tabs_content.dark{
     background-color: rgb(120, 120, 120);
 }
@@ -52,7 +48,7 @@ h1.light, h2.light, h3.light, h4.light, h5.light, h6.light, p.light{
     background-color: rgb(54, 54, 54);
 }
 .tabs_nav_btn.dark{
-    background-color: rgb(51, 50, 50);
+    background-color:rgb(32, 30, 30);
     color: white;
 }
 .menu{
@@ -75,3 +71,27 @@ select {
     appearance: none;
     text-align: center;
 }
+.new.changing-color.light{
+    color:white;
+}
+
+.tabs_nav_btn.changing-color.tab.light.active{
+    background-color: rgb(146, 143, 143);
+}
+.tabs_nav_btn.changing-color.tab.light{
+    color:black;
+    background-color: rgb(187, 185, 185);
+}
+.tabs_nav_btn.changing-color.tab.light:hover{
+    background-color: rgb(159, 159, 159);
+}
+.tabs_nav_btn.changing-color.tab.dark{
+    background-color: rgb(51, 50, 50);
+}
+.tabs_nav_btn.changing-color.tab.dark.active{
+    background-color: rgb(19, 19, 19);
+}
+.tabs_nav_btn.changing-color.tab.dark:hover{
+    background-color: rgb(35, 35, 35    );
+}
+

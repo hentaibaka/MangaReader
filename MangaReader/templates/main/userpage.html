@@ -12,7 +12,7 @@
 
 {% block content %}
     <h1  class="changing-color" style="text-align: center; padding: 30px 0 10px; font-weight: 500;">{{ user.username }}</h1>
-    <div style="display: flex; justify-content: center; padding: 10px 0;">
+    <div style="display: flex; justify-content: center; padding: 10px 0; border: 1px solid black; background-color: brown; margin-bottom: 15px ;">
         <a id="light-theme-btn" style="text-decoration: none; cursor: pointer;">🔆</a>
         <a id="dark-theme-btn" style="text-decoration: none; cursor: pointer; ">🌙</a>
     </div>
@@ -21,7 +21,7 @@
         <div class="tabs">
             <div class="tabs_nav">
                 {% for list, mangaList in lists.items %}
-                    <button class="tabs_nav_btn changing-color" type="button" data-tab="value">{{ list.name }}</button>
+                    <button class="tabs_nav_btn changing-color tab" type="button" data-tab="value">{{ list.name }}</button>
                 {% endfor %}
             </div>
 
