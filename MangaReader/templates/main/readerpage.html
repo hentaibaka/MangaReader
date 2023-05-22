@@ -44,14 +44,14 @@
         {% else %}
             <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
             <!--Я в тебя верю, ты сможешь-->
-            <a class="chap none" style="pointer-events: none;">Предыдущая глава</a>
+            <a class="chap none" style="pointer-events: none;">&lt; Предыдущая глава </a>
         {% endif %}
 
         {% if nextChapter %}
             <a class="chap" href="{% url 'readerpage' mangaSlug=manga.slug chapterNumber=nextChapter.number%}">Следующая глава</a>
         {% else %}
             <!--Сделать ссылку/кнопку не кликабельной если нет след/пред главы-->
-            <a class="chap" style="pointer-events: none;">Следующая глава</a> 
+            <a class="chap" style="pointer-events: none;">Следующая глава &gt;</a> 
         {% endif %}
     </div>
     <a class="js-scroll d-none" style="border: none; cursor: pointer;">

@@ -34,11 +34,11 @@
             <form id="listform" method="post", enctype="multipart/form-data">
                 {% csrf_token %}    
                 {{ listForm.list }}
-                <button id="listformsubmit" type="submit">Сохранить</button>
+                <button class="changing-color" id="listformsubmit" type="submit">Сохранить</button>
                 {% if isUserList %}
-                    <button id="listformcancel" type="cancel">Удалить</button>
+                    <button class="changing-color" id="listformcancel" type="cancel">Удалить</button>
                 {% else %}
-                    <button hidden id="listformcancel" type="cancel">Удалить</button>
+                    <button class="changing-color" hidden id="listformcancel" type="cancel">Удалить</button>
                 {% endif %}
             </form>
         </div>
@@ -46,11 +46,11 @@
             <form id="markform" method="post", enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ markForm.mark }}
-                <button id="markformsubmit" type="submit">Сохранить</button>
+                <button class="changing-color" id="markformsubmit" type="submit">Сохранить</button>
                 {% if isUserMark %}
-                    <button id="markformcancel" type="cancel">Удалить</button>
+                    <button class="changing-color" id="markformcancel" type="cancel">Удалить</button>
                 {% else %}
-                    <button hidden id="markformcancel" type="cancel">Удалить</button>
+                    <button class="changing-color" hidden id="markformcancel" type="cancel">Удалить</button>
                 {% endif %}
             </form>
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="cont">
         <div class="title_head">
-            <h1>{{ manga.title }}</h1>
+            <h1 class="new changing-color">{{ manga.title }}</h1>
             <div class="mark_info">
                 <div class="title_mark">
                     <!--id мне нужен чтобы через js менять значение через ajax-->
@@ -74,8 +74,8 @@
             </div>
             <div class="tabs">
                 <div class="tabs_nav">
-                    <button class="tabs_nav_btn" type="button" data-tab="value">Описание</button>
-                    <button class="tabs_nav_btn" type="button" data-tab="value">Главы</button>
+                    <button class="tabs_nav_btn changing-color" type="button" data-tab="value">Описание</button>
+                    <button class="tabs_nav_btn changing-color" type="button" data-tab="value">Главы</button>
                 </div>
                 <div class="tabs_content changing-color">
                     <div class="tabs_item">
